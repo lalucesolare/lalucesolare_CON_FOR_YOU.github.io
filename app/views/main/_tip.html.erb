@@ -1,0 +1,73 @@
+<% unless current_user.liked_tips.empty? %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Title</th>
+      <th>Image</th>
+      <th>Content</th>
+      <th></th>
+      <th>댓글 작성</th>
+      <th>댓글 보기</th>
+      <th><i class="fa fa-heart" style="font-size:24px;color:red"></i></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_user.liked_tips.each do |tip| %>
+      <tr>
+        <td>Tip</td>
+        <td><%= tip.title %></td>
+        <td>
+          <img src="<%= tip.image %>" height="250" width="180"/><br>
+          <a href="<%= tip.image %>" target="_blank">크게보기</a> 
+        </td>
+        <td><%= tip.content %></td>
+        <td><%= link_to 'Show', tip %><br>
+          <% if tip.user == current_user %>
+            <%= link_to 'Edit', edit_tip_path(tip) %><br>
+            <%= link_to 'Destroy', tip, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+        
+        <!--댓글작성-->
+        <td>
+          <form action = "/<%= tip.id%>/comment_tip_create" method= "post">
+            댓글 : <textarea name="content"></textarea>
+            <button type="submit" class="btn btn-default btn-xs">제출</button>
+          </form>
+        
+        </td>
+        
+        <!--댓글보기-->
+        <td>
+          <%tip.comment_tips.each do |c| %>
+            <%= fa_icon('comment-alt') %> <%= c.content%>
+              <% if c.user == current_user %>
+              <%= link_to comment_tip_edit_path(x_id: tip.id, c_id: c.id) do %>
+                수정
+              <% end %>
+              <a href="<%= tip.id %>/comment_tip_destroy/<%= c.id %>"> 삭제 </a>
+              <%end%><br>
+          <%end%>
+        </td>
+        <td>
+            <% if tip.liked_tip_users.include?(current_user) %>
+              <!--좋아요 누름-->
+              <%= link_to fa_icon('heart', style: 'font-size:24px; color: red;'), 
+                          like_tip_path(post_id: tip.id), method: :post %>
+            <% else %>
+              <!--좋아요 안 누름-->
+              <%= link_to fa_icon('heart', style: "font-size:24px; color: grey;"), 
+                          like_tip_path(post_id: tip.id), method: :post %>
+            <% end %>
+            <%= tip.liketips.count %> 명이 좋아합니다. <br><br>
+          </td>
+        
+      </tr>
+      
+    <% end %>
+    
+  </tbody>
+</table>
+<% end%>

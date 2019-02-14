@@ -1,0 +1,42 @@
+<%= form_for(@busking) do |f| %>
+  <% if @busking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@busking.errors.count, "error") %> prohibited this busking from being saved:</h2>
+
+      <ul>
+      <% @busking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="container">
+<div class="field">
+<table  class="table table-condensed">
+  <thead>
+    <tr>
+      <th><%= f.label :day %></th>
+      <th><%= f.label :place %></th>
+      <th><%= f.label :name %></th>
+      <th><%= f.label :image %><br></th>
+      <th><%= f.label :content %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= f.date_select :day %></td>
+      <td><%= f.text_field :place %></td>
+      <td><%= f.text_field :name %></td>
+      <td><%= f.file_field :image, multipart: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %></td>
+      <td> <%= f.text_area :content %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="actions">
+    <%= f.submit %>
+<% end %>
+</div>

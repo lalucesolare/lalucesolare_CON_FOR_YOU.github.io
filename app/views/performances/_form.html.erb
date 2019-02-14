@@ -1,0 +1,51 @@
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<%= form_for(@performance) do |f| %>
+  <% if @performance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@performance.errors.count, "error") %> prohibited this performance from being saved:</h2>
+
+      <ul>
+      <% @performance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="container">
+<div class="field">
+<table  class="table table-condensed">
+  <thead>
+    <tr>
+      <th><%= f.label :date %></th>
+      <th><%= f.label :title %></th>
+      <th> <%= f.label :poster %></th>
+      <th><%= f.label :seat %><br></th>
+      <th><%= f.label :content %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= f.date_select :day %></td>
+      <td><%= f.text_field :title %></td>
+      <td><%= f.file_field :image, multipart: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %></td>
+      <td><%= f.file_field :second, multipart: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %></td>
+      <td> <%= f.text_area :content %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="actions">
+    <%= f.submit %>
+</div>
+
+<% end %>
+</div>

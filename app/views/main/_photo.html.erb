@@ -1,0 +1,67 @@
+<% unless current_user.liked_photos.empty? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Title</th>
+        <th>Image</th>
+        <th>Content</th>
+        <th></th>
+        <th>댓글 작성</th>
+        <th>댓글 보기</th>
+        <th><i class="fa fa-heart" style="font-size:24px;color:red"></i></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% current_user.liked_photos.each do |photo| %>
+        <tr>
+          <td>Photo</td>
+          <td><%= photo.title %></td>
+          <td><img src="<%= photo.image %>" height="250" width="180"/></td>
+          <td><%= photo.content %></td>
+          <td><%= link_to 'Show', photo %><br>
+            <% if photo.user == current_user %>
+              <%= link_to 'Edit', edit_photo_path(photo) %><br>
+              <%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </td>
+          <!--댓글작성-->
+          <td>
+            <form action = "/<%= photo.id%>/comment_photo_create" method= "post">
+              댓글 : <textarea name="content"></textarea>
+              <button type="submit" class="btn btn-default btn-xs">제출</button>
+            </form>
+          
+          </td>
+          
+          <!--댓글보기-->
+          <td>
+            <% photo.comment_photos.each do |c| %>
+              <%= fa_icon('comment-alt') %> <%= c.content%>
+              <% if c.user == current_user %>
+                <%= link_to comment_photo_edit_path(x_id: photo.id, c_id: c.id) do %>
+                  수정
+                <% end %>
+                <a href="<%= photo.id %>/comment_photo_destroy/<%= c.id %>"> 삭제 </a>
+              <% end %>
+              <br>
+            <%end%>
+          </td>
+          <td>
+              <% if photo.liked_photo_users.include?(current_user) %>
+                <!--좋아요 누름-->
+                <%= link_to fa_icon('heart', style: 'font-size:24px; color: red;'), 
+                            like_photo_path(post_id: photo.id), method: :post %>
+              <% else %>
+                <!--좋아요 안 누름-->
+                <%= link_to fa_icon('heart', style: "font-size:24px; color: grey;"), 
+                            like_photo_path(post_id: photo.id), method: :post %>
+              <% end %>
+              <%= photo.likephotos.count %> 명이 좋아합니다. <br><br>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

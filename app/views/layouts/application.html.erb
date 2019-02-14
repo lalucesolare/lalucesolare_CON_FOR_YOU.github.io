@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CON FOR YOU</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://www.shieldui.com/shared/components/latest/css/light/all.min.css" rel="stylesheet" />
+  <link href="css/theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--팁아이콘-->
+	  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+  
+  <style>
+	.container-gallery {
+    	background: url(../images/gallery_back.jpg) no-repeat center center fixed;}
+    .container-reservations {
+	    background: url(../images/reservation_back.jpg) no-repeat center center fixed;}
+	.container-dishes {
+	    background: white;}
+	.container-services {
+	background: url(../images/services_back.jpg) no-repeat center center fixed;}
+	.navbar-inverse {
+      background-color: #000000;
+      border-color: #0000000;}
+    .footer-socialicon:hover  {
+	    color:  #000000;
+    	background-color: #EC1B24;}
+        #footer {
+        	background-color: #0000000;
+        	padding-top: 30px;
+	        padding-bottom: 20px;}
+    /*.container-fluid { height: 200px; width: 1130px; position: absolute; overflow: hidden; }*/
+    /*.container-fluid img { height: 200px; position: absolute; }*/
+
+	p {
+		color: white;
+	}
+	
+
+
+	
+
+</style>
+
+<script type="text/javascript">
+    function showHide(id) {
+       var obj = document.getElementById(id);
+       if (obj.style.display == 'none')
+           obj.style.display = 'block';
+       else
+           obj.style.display = 'none';
+    }
+</script>
+
+
+
+
+</head>
+ 
+<body style="padding-top: 50px;">
+ <nav class="navbar navbar-inverse navbar-fixed-top" >
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<h3 style="color: white"><a href='/'>CON FOR YOU</a></h3>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/performances" class="smooth-scroll">Line Up</a></li>
+				<li><a href="/posts" class="smooth-scroll">Community</a></li>
+				<li><a href="/tips" class="smooth-scroll">Tips</a></li>
+				<li><a href="/buskings" class="smooth-scroll">Busking</a></li>
+				<li><a href="/photos" class="smooth-scroll">Photos</a></li>
+				<li><a href="/videos" class="smooth-scroll">Videos</a></li>
+				<li><a href="/mail/main" class="smooth-scroll">Mail</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+		<p style="text-align:right;color: white">
+			<% if user_signed_in?%>
+			    <%=current_user.name %>님 (<%=current_user.role %>)&nbsp;
+			    <%=link_to 'My Page', my_page_path %>
+			    <%=link_to '로그아웃', destroy_user_session_path, method: 'delete' %>
+			<%else %>
+			    <%=link_to '회원가입', new_user_registration_path %>
+			    <%=link_to '로그인', new_user_session_path%>
+			<%end%>
+		</p>
+	</div><!-- /.container-fluid -->
+</nav>
+<br><br><br>
+<div class="container" style="padding-bottom: 10px; padding-top: 10px;">
+	<form action='/main/search' style="float: right;">
+	    <input type="date" name="searchdate" class="form-control text-center">
+	    <input type="submit" class="btn btn-success form-control" 
+	            value="이 날엔 무슨 공연?"
+	            style="background-color:black;">
+	</form>
+</div>
+
+<%= yield %>
+
+</body>
+</html>

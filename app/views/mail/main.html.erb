@@ -1,0 +1,51 @@
+<head>
+    <style type="text/css">
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+
+<body> 
+<br>
+<div class="container">
+    <!--<h3>-->
+    <!--  <a href='/'><i class="fas fa-home"></i>Main</a> -->
+    <!--  |-->
+    <!--  <a href='/performances'>Line Up</a>-->
+    <!--  |-->
+    <!--  <a href='/posts'>Community</a>-->
+    <!--  |-->
+    <!--  <a href='/tips'>Tips</a>-->
+    <!--  |-->
+    <!--  <a href= '/buskings'>Buskings</a>-->
+    <!--  |-->
+    <!--  <a href='/photos'>Review Photos</a>-->
+    <!--  |-->
+    <!--  <a href='/videos'>Review Videos</a>-->
+    <!--</h3>-->
+    
+    <center><h2><a href='/mail/index'><i class="far fa-envelope"></i> 메일 보내기</a><br></h2></center>
+    <br>
+    <center><h2><i class="far fa-envelope-open"></i> 메일 보관함</h2></center>
+    <br>
+    <table align="center" class ="table table-striped">
+        <tr>
+            
+            <th width="20%">받는 사람의 메일 주소</th>
+            <th width="20%">제목</th>
+            <th>내용</th>
+        </tr>
+    <%@mailposts.each do |x| %>
+        <tr>
+            <td><%=x.email%></td>
+            <td><%=x.title%></td>
+            <td><%=x.content%></td>
+        </tr>
+    
+    <%end%>
+    </table>
+    </div>
+</body>

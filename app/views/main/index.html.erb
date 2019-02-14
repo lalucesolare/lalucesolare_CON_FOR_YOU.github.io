@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Festival</title>
+	
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light|Yeon+Sung" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://www.shieldui.com/shared/components/latest/css/light/all.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--팁아이콘-->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<style>
+	.container-gallery {
+    	background: url(../images/gallery_back.jpg) no-repeat center center fixed;
+	    font-family: 'Shadows Into Light', cursive;
+        font-family: 'Yeon Sung', cursive;
+	}
+    .container-reservations {
+	    background: url(../images/4.jpg) no-repeat center center fixed;
+        font-family: 'Shadows Into Light', cursive;
+        font-family: 'Yeon Sung', cursive;
+    }
+	.container-dishes {
+	    background: white;
+	    font-family: 'Shadows Into Light', cursive;
+        font-family: 'Yeon Sung', cursive;
+	}
+	.container-services {
+	    background: url(../images/3.jpg) no-repeat center center fixed;
+	    font-family: 'Shadows Into Light', cursive;
+        font-family: 'Yeon Sung', cursive;
+	}
+	.navbar-inverse {
+      background-color: #000000;
+      border-color: #000000;
+	  font-family: 'Shadows Into Light', cursive;
+        font-family: 'Yeon Sung', cursive;
+	}
+    .footer-socialicon:hover  {
+	    color:  #000000;
+    	background-color: #EC1B24;
+        font-family: 'Shadows Into Light', cursive;
+        font-family: 'Yeon Sung', cursive;
+    }
+        #footer {
+        	background-color: #000000;
+        	padding-top: 30px;
+	        padding-bottom: 20px;
+            font-family: 'Shadows Into Light', cursive;
+            font-family: 'Yeon Sung', cursive;
+        }
+    /*.container-fluid { height: 200px; width: 1130px; position: absolute; overflow: hidden; }*/
+    /*.container-fluid img { height: 200px; position: absolute; }*/
+    
+    @charset "utf-8";
+    /* 버튼 공통 */
+    .btn_comm {display:block;overflow:hidden;background:url(//cdnticket.melon.co.kr/resource/image/web/common/btn_comm.png) no-repeat;text-indent:-9999px;}
+
+    a .btn_mslider_prev,
+    a .btn_mslider_next {width:120px;height:120px;}
+    a .btn_mslider_prev {background:url(//cdnticket.melon.co.kr/resource/image/web/common/wrap_main_slider_btn.png) no-repeat 0 0;}
+    a .btn_mslider_next {background:url(//cdnticket.melon.co.kr/resource/image/web/common/wrap_main_slider_btn.png) no-repeat -120px 0;}
+    a:hover .btn_mslider_prev {background-position:0 -120px;}
+    a:hover .btn_mslider_next {background-position:-120px -120px;}
+    
+    .wrap_main_slider {display:block;overflow:hidden;width:60%;padding-top:34px;margin: 0 auto;}
+    .wrap_main_slider #slider {position:relative;width:1008px;margin:0 auto;}
+    .wrap_main_slider .slider_inner {position:relative;width:274px;height:396px;margin:0 auto;}
+    .wrap_main_slider .list_slider{ position:absolute;left:0px;margin-left:-21px}
+    .wrap_main_slider .list_slider li {position:relative;float:left;width:269px;height:396px;padding:0 2px 0 3px}
+    .wrap_main_slider .list_slider li img {width:256px;}
+    .wrap_main_slider .list_slider a {display:block;}
+    .wrap_main_slider .list_slider a:hover {text-decoration:none;background-color:#151515}
+    .wrap_main_slider .list_slider .thumb {display:block;position:relative;width:256px;height:320px;padding:6px 6px 0 7px;overflow:hidden}
+    .wrap_main_slider .list_slider .thumb .thumb_on {display:none;}
+    .wrap_main_slider .list_slider .thumb .frame {display:block;position:absolute;top:6px;left:7px;width:256px;height:320px;background:url(//cdnticket.melon.co.kr/resource/image/web/common/bg_frame.png) no-repeat;}
+    .wrap_main_slider .list_slider .on .thumb .thumb_on .frame,
+    .wrap_main_slider .list_slider .on .thumb .thumb_off .frame {background:none;width:254px;height:318px;border:1px solid #000;opacity:0.03; filter:alpha(opacity=3);}
+    .wrap_main_slider .list_slider .thumb .thumb_off .frame {background-position:-320px 0;}
+    .wrap_main_slider .list_slider .txt {display:block;padding:12px 0 0;height:58px}
+    .wrap_main_slider .list_slider .txt .name {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:18px;line-height:25px;font-weight:bold;color:#000;font-family:"맑은 고딕","Malgun Gothic";text-align:center;margin-bottom:4px;padding:0 7px}
+    .wrap_main_slider .list_slider .txt .opt {display:block;font-size:14px;line-height:14px;color:#888;font-family:"맑은 고딕","Malgun Gothic";text-align:center;}
+    .wrap_main_slider .list_slider .hover .thumb {}
+    .wrap_main_slider .list_slider .hover .thumb .thumb_off {display:none;}
+    .wrap_main_slider .list_slider .hover .thumb .thumb_on {display:block;}
+    .wrap_main_slider .list_slider .hover .txt {display:none;}
+    .wrap_main_slider .list_slider .hover .txt_hover {display:block;}
+    .wrap_main_slider .list_slider .txt_hover {display:none;}
+    .wrap_main_slider .list_slider .txt_hover .name {display:block;overflow:hidden;font-weight:normal;text-overflow:ellipsis;white-space:nowrap;font-size:18px;line-height:25px;color:#fff;text-align:center;margin-bottom:5px;}
+    .wrap_main_slider .list_slider .txt_hover .day {display:block;font-size:14px;line-height:14px;color:#fff;text-align:center;letter-spacing:0;}
+    .wrap_main_slider .prev {position:absolute;right:100%;top:0;width:100%;height:246px;padding-top:150px;padding-right:30px;z-index:20;margin-right:-91px}
+    .wrap_main_slider .prev span {float:right;}
+    .wrap_main_slider .next {position:absolute;left:100%;top:0;width:100%;height:246px;padding-top:150px;padding-left:30px;z-index:20;margin-left:-91px}
+    .wrap_main_slider .next span {float:left;}
+</style>
+    
+</head>
+<body>
+    <!--font-family: 'Black Han Sans', sans-serif;-->
+    
+<!-- Navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<h3 style="color: white"><a href='/'>CON FOR YOU</a></h3>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#about" class="smooth-scroll">Services</a></li>
+				<li><a href="#services" class="smooth-scroll">Line Up</a></li>
+				<li><a href="#menu" class="smooth-scroll">Community</a></li>
+				<li><a href="#dishes" class="smooth-scroll">Tips</a></li>
+				<li><a href="#news" class="smooth-scroll">Busking</a></li>
+				<!--<li><a href="#gallery" class="smooth-scroll">Videos</a></li>-->
+				<li><a href="#reviews" class="smooth-scroll">Reviews</a></li>
+				<li><a href="#reservations" class="smooth-scroll">Send Mail</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="container-services" >
+    <div class="container" id="about">
+        
+		<div class="clearfix hidden-xs" style="width:120%; height:50px;"></div>
+        <div class="row">
+            <div class="col-md-4 text-center">
+				<span class="fa fa-calendar svcicon"></span>
+                <br /><br />
+                <h2 class="text-warning">LINE UP</h2><br />
+				<p>콘서트 라인업 / 공연장 내부 사진 제공
+				</p>
+				<div align="center" ><a href="/performances"><button type="button" class="btn" >바로가기</button></a></div>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fa fa-comment-o" style="font-size:48px"></i>
+                <br /><br />
+				<h2 class="text-warning">COMMUNITY</h2><br />
+				<p>콘서트 커뮤니티</p>
+				<div align="center" ><a href="/posts"><button type="button" class="btn" >게시글 보러가기</button></a>
+                </div>
+            </div>
+			<div class="col-md-4 text-center">
+                <span class="fa fa-map-signs svcicon"></span>
+                <br /><br />
+				<h2 class="text-warning">TIPS</h2><br />
+				<p>콘서트 굿즈 안내
+				</p>
+				<div align="center" ><a href="/tips"><button type="button" class="btn" >TIP 보러가기</button></a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <span class="fa fa-music" style="font-size:48px"></span>
+                <br /><br />
+				<h2 class="text-warning">BUSKINGS</h2><br />
+				<p>길거리 버스킹 정보 한눈에 보기!
+				</p>
+				<div align="center" ><a href="/buskings"><button type="button" class="btn" >BUSKING 보러가기</button></a>
+                </div>
+            </div>
+            
+            <div class="col-md-4 text-center">
+                <span class="fa fa-thumbs-o-up svcicon"></span>
+                <br /><br />
+				<h2 class="text-warning">REVIEWS</h2><br />
+				<p>공연 후기 (사진 / 동영상)
+				</p>
+				<div align="center" ><a href="/photos"><button type="button" class="btn" >PHOTO 보러가기</button></a>
+                </div>
+                <div align="center" ><a href="/videos"><button type="button" class="btn" >VIDEO 보러가기</button></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+<div class="page-header" id="services">
+    <h1 class="text-center text-danger"><strongr>LINE UP</strongr></h1>
+    
+    <div align="center" >
+        <a href="/performances"><button type="button" class="btn" >바로가기</button></a>
+    </div><br>
+</div>
+
+<!--여기부터-->
+<!--<div class="container-fluid bg-3 text-center">    -->
+<!--  <div class="row">-->
+<!--    <% @lastperformances.each do |last| %>-->
+<!--        <div class="col-sm-4">-->
+<!--          <strong><%= last.day %></strong>-->
+<!--          <img src="<%= last.image %>" class="img-responsive margin" style="width:65%" "height:70%" alt="Image">-->
+<!--          <strong> <%= last.title %></strong>-->
+<!--        </div>-->
+<!--    <% end %>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="wrap_main_slider">
+            <div id="slider">
+                <a href="/performances" class="prev"><span class="btn_comm btn_mslider_prev">이전</span></a>
+                <div class="slider_inner">
+                    <ul class="list_slider" id="sliderInner" style="width: 4573px; left: -1076px;">
+                        <% @performances.each do |per| %>
+                        <li class="on">
+                        <a href="/performances/<%=per.id%>"> 
+                        <span class="thumb">
+                                    <span class="thumb_off">
+                                    <img src="<%= per.image %>" onerror="noImage(this, 256, 320)" alt="">
+		                                <span class="frame"></span>
+                                    </span>
+                                </span>
+                                <span class="txt">
+                                    <span class="name"><%= per.title %></span>
+                                    <span class="opt"><%= per.day %></span>
+                                </span>
+                            </a>
+                        </li>
+                        <% end %>
+                    </ul>
+                </div>
+                <a href="/performances" class="next"><span class="btn_comm btn_mslider_next">다음</span></a>
+            </div>
+        </div>
+</div>
+</center>
+
+<br><br>
+<div class="container-menu">
+    <div class="container">
+        <div class="page-header" id="menu">
+            <h1 class="text-center text-danger">COMMUNITY</h1></h1>
+        </div>
+        <div align="center" ><a href="/posts"><button type="button" class="btn" >게시글 보러가기</button></a>
+        </div><br><br>
+        
+        <div class="container">
+        <table align="center" style = "border: 1px; solid #444444; border-collapse: collapse;">
+            <tr>
+                <th>제목</th>
+                <th>내용</th>
+            </tr>
+            <% @posts.each do |p| %>
+                <tr>
+                    <td style="width:50%"><%= p.title %></td>
+                    <td style="width:50%"><%= p.content %></td>
+                </tr>
+            <% end %>
+            
+        </table>
+        </div>
+        
+    </div>
+</div>
+
+<div class="container-dishes">
+	<div class="clearfix hidden-xs" style="width:100%; height:10px;"></div>
+	<div class="container">
+		<div class="page-header" id="dishes">
+			<h1 class="text-center text-danger">TIPS</h1></h1>
+		</div>
+		<div align="center" ><a href="/tips"><button type="button" class="btn" >TIP 보러가기</button></a>
+        </div><br><br>
+        
+        <div class="container">
+        <table align="center">
+            <tr>
+                <th>제목</th>
+                <th>파일</th>
+                <th>내용</th>
+            </tr>
+            <% @tips.each do |t| %>
+                <tr>
+                    <td><%= t.title %></td>
+                    <td><img src="<%= t.image %>" class="img-responsive margin" style="width:10%" "height:20%" alt="Image"></td>
+                    <td><%= t.content %></td>
+                </tr>
+            <% end %>
+            
+        </table>
+        </div>
+	</div>
+	<div class="clearfix hidden-xs" style="width:100%; height:50px;"></div>
+</div>
+
+
+<div class="container-news">
+    <div class="container">
+        <div class="page-header" id="news">
+            <h1 class="text-center text-danger">Busking</h1>
+        </div>
+        <div class="row">
+            
+        	<div align="center" >
+        	    <a href="/buskings">
+        	        <button type="button" class="btn" >Busking 보러가기</button>
+        	    </a>
+            </div>
+        </div><br><br>
+        
+        
+        <div class="container-fluid bg-3 text-center">    
+          <div class="row">
+            <% @buskings.each do |busking| %>
+                <div class="col-sm-4">
+                  <strong><%= busking.day %></strong>
+                  <strong> | <%= busking.place %></strong>
+                  <strong> | <%= busking.name %></strong>
+                  <img src="<%= busking.image %>" class="img-responsive margin" style="width:65%" "height:70%" alt="Image">
+                  <strong> <%= busking.content %></strong>
+                </div>
+            <% end %>
+          </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+<!-- 후기 -->
+
+<div class="container-news">
+    <div class="container">
+        
+        <div class="page-header" id="reviews">
+            <h1 class="text-center text-danger">REVIEW</h1>
+        </div>
+        
+        <!-- photo -->
+        <div class="page-header">
+            <h3 class="text-center text-danger">Photo</h3>
+        </div>
+        <div class="row">
+            
+        	<div align="center" >
+        	    <a href="/photos">
+        	        <button type="button" class="btn" >Photo 보러가기</button>
+        	    </a>
+            </div>
+        </div><br><br>
+        
+        
+        <div class="container-fluid bg-3 text-center">    
+          <div class="row">
+            <% @photos.each do |photo| %>
+                <div class="col-sm-4">
+                  <strong><%= photo.title %></strong>
+                   <img src="<%= photo.image %>" class="img-responsive margin" style="width:65%" "height:70%" alt="Image">
+                  <strong> <%= photo.content %></strong>
+                </div>
+            <% end %>
+          </div>
+        </div>
+        
+        <!-- video -->
+        
+        <div class="page-header">
+            <h3 class="text-center text-danger">Video</h3>
+        </div>
+        <div class="row">
+            
+        	<div align="center" >
+        	    <a href="/videos">
+        	        <button type="button" class="btn" >Video 보러가기</button>
+        	    </a>
+            </div>
+        </div><br><br>
+        
+        <div class="container-fluid bg-3 text-center">    
+          <div class="row">
+            <% @videos.each do |video| %>
+                <div class="col-sm-4">
+                  <strong><%= video.title %></strong>
+                  <video width="320" height="240" controls>
+                    <source src="<%= video.image %>" type="video/mp4">
+                    <source src="<%= video.image %>" type="video/ogg">
+                    <source src="<%= video.image %>" type="video/webm">
+                    <object data="<%= video.image %>" width="320" height="240">
+                    <embed src="<%= video.image %>" width="320" height="240">
+                    </object> 
+                  </video><br>
+                  <strong> <%= video.content %></strong>
+                </div>
+            <% end %>
+          </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container-reservations">
+    <div class="container">
+        
+                <form action="/mail/write" method='post'>
+                    <div class="row">
+                        <div class="page-header" id="reservations">
+                            <h1 class="text-center text-default">Send Email</h1>
+                            <center><h2><a href='/mail/main' style="color:white"><i class="far fa-envelope-open"></i> 메일 보관함 </a></h2></center>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group"> 
+                                <h4 class="text-center text-default">Title</h4>    
+                                <input type="text" class="form-control" id="title" name="title" placeholder="제목을 써주세요">
+                                   </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <h4 class="text-center text-default">Email Address</h4>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="메일을 보낼 주소를 입력해주세요">
+                             </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <h4 class="text-center text-default">Content</h4>
+                                <textarea class="form-control" rows="5" id="content" name="content" placeholder="내용을 적어주세요"></textarea>
+                           </div>
+                            <button type="submit" class="btn btn-danger">Send Mail</button>
+                            
+                        </div>
+                    </div>
+                </form>
+            
+    </div>
+</div>
+
+
+
+
+
+<footer id="subfooter" class="clearfix">
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-3">
+                <p style="font-size:18px; color:black;"><span class="fa fa-thumbs-o-up text-danger"></span> LIKE LION</p>
+                <p style="color:black;">멋 - 하!</p>
+                <p style="color:black;">(멋사 - 하이 !)</p>
+            </div>
+            <div class="col-md-3">
+                <p style="font-size:18px; color:black;"><span class="fa fa-clock-o text-danger"></span> SCHOOL</p>
+                <p style="color:black;">DONGDUK</p>
+				<p style="color:black;">WOMEN'S</p>
+                <p style="color:black;">UNIVERSITY</p>
+            </div>
+			<div class="col-md-3">
+                <p style="font-size:18px; color:black;"><span class="fa fa-map-marker text-danger"></span> CONTACTS</p>
+                <p style="color:black;">CY - lalucesolare@likelion.org</p>
+                <p style="color:black;">AR - har9098@likelion.org</p>
+                <p style="color:black;">DH - deg9810@likelion.org</p>
+                <p style="color:black;">YJ - spdlqj9777@likelion.org</p>
+            </div>
+            <div class="col-md-3">
+                <p style="font-size:18px; color:black;"><span class="fa fa-envelope-o text-danger"></span> INSTAGRAM</p>
+                
+                <p>
+                    <a class="fa fa-instagram footer-socialicon" target="_blank" href="https://www.instagram.com/deg9810"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<footer id="footer" class="clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                
+            </div>
+            <div class="col-md-3">
+                <p style="font-family: 'Shadows Into Light', cursive; font-family: 'Yeon Sung', cursive;">Created by<br>CHAYOON KIM, AREUM HAN,<br>DAHEE AHN, YEJI SEO</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/jquery.mixitup.min.js"></script>
+<link href="css/magnific-popup.css" rel="stylesheet">
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/theme.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(function($) {
+        // Mix It Up Gallery and Magnific Popup setup
+        $('.container-gallery').mixItUp({
+			load: {
+				filter: '.dishes'
+			}
+		});
+        $('.container-gallery').magnificPopup({
+            delegate: 'a',
+            type: 'image'
+        });
+
+        // ShieldUI Calendar setup
+        $("#calendar").shieldCalendar({
+            footer: {
+                enabled: true,
+                footerTemlpate: "{0:dd.MM.yy}"
+            },
+            min: new Date("2009/2/23"),
+            max: new Date("2039/3/1"),
+            value: new Date()
+        });
+
+        // ShieldUI QRCode setup
+        $("#qrcode").shieldQRcode({
+            mode: "byte",
+            size: 150,
+            value: "https://demos.shieldui.com",
+            style: {
+                color: "#ed1b24"
+            }
+        });
+
+        // Google Maps setup
+        var googlemap = new google.maps.Map(
+            document.getElementById('googlemap'),
+            {
+                center: new google.maps.LatLng(127.042529, 37.606864),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+        );
+    });
+</script>
+<%# end %>
+</body>
+</html>

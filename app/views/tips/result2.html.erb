@@ -1,0 +1,77 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<h3>
+  <a href='/'><i class="fas fa-home"></i>Main</a> 
+  |
+  <a href='/posts'>Community</a>
+  |
+  <a href='/tips'>Tips</a>
+  |
+  <a href= '/buskings'>Buskings</a>
+  |
+  <a href='/photos'>Review Photos</a>
+  |
+  <a href='/videos'>Review Video</a>
+  |
+  <a href='/mail/main'>Mail</a>
+</h3>
+
+</br></br></br>
+
+<div class="form-group row">
+    <div class="col-md-2 col-md-offset-10">
+        <a href="/tips" class="btn btn-default">목록으로 돌아가기</a>
+    </div>
+</div></br>
+
+<h4><b class="text-warning"><%= @keyword %></b>에 대한 카카오(다음) 키워드검색결과입니다.</a></h4>
+<table class="table table-hover table-striped">
+  <thead>
+    <th width="400px">글 제목</th>
+    <th>글 내용</th>
+  </thead>
+  <tbody>
+    <% @item_.each do |iteminfo| %>
+      <tr>
+        <td>
+          <%= link_to iteminfo['title'].html_safe,  iteminfo['url'] %>
+        </td>
+        <td>
+          <%= iteminfo['contents'].html_safe %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br><br><br>
+  
+<h4><b class="text-warning"><%= @keyword %></b>에 대한 카카오(다음) 영상검색결과입니다.</a></h4></br>
+<div class="container">
+  <% @item.each do |iteminfo| %>
+  <div class="col-sm-4">
+  <div class= class="card bg-light" style="width:350px; height=500px;">
+    <a href = "<%= iteminfo['url'].html_safe %>"><img class="card-img-top" src="<%= iteminfo['thumbnail'].html_safe %>" style="width:100%; height=300px;"></a>
+    <div class="card-body">
+      <center><p class="card-title">제목: <%= iteminfo['title'].html_safe %></p></center>
+    </div>
+  </div>
+  </div>
+  <% end %>
+</div>
+
+</body>

@@ -1,0 +1,125 @@
+<head>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+ 
+    <center><h1><%= @sdate %>일에는!</h1></center>
+    
+     <div class="page-header" id="news">
+        <h1 class="text-center text-danger">LINE UP</h1>
+    </div>
+    <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Poster</th>
+              <th>Seat</th>
+              <th>Content</th>
+              <th>Show</th>
+              <th>Edit</th>
+              <th>Destroy</th>
+              <th>댓글 작성</th>
+              <th>댓글 보기</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @performances.each do |performance| %>
+            <% if @sdate == performance.day.to_s %>
+              <tr>
+                <td><%= performance.day %></td>
+                <td><%= performance.title %></td>
+                <td>
+                  <img src="<%= performance.image %>" height="250" width="180"/><br>
+                  <a href="<%= performance.image %>" target="_blank">크게보기</a>
+                </td>
+                <td>
+                  <img src="<%= performance.second %>" height="250" width="180"/><br>
+                  <a href="<%= performance.second %>" target="_blank">크게보기</a>  
+                </td>
+                <td><%= performance.content %></td>
+                <td><%= link_to 'Show', performance %></td>
+                <td><%= link_to 'Edit', edit_performance_path(performance) %></td>
+                <td><%= link_to 'Destroy', performance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                
+                <!--댓글작성-->
+                <td>
+                  <form action = "/<%= performance.id%>/comment_per_create" method= "post">
+                    댓글 : <textarea name="content"></textarea>
+                    <button type="submit" class="btn btn-default btn-xs">제출</button>
+                  </form>
+                </td>
+                
+                <!--댓글보기-->
+                <td  width="15%">
+                  <%performance.comment_pers.each do |c| %>
+                    <%= c.content%>
+                    <a href="<%= performance.id %>/comment_per_destroy/<%= c.id %>"> 삭제 </a><br>
+                  <%end%>
+                </td>
+              </tr>
+            <% end %>
+            <% end %>
+          </tbody>
+        </table>
+    
+    <div class="page-header" id="news">
+        <h1 class="text-center text-danger">Busking</h1>
+    </div>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Place</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Content</th>
+            <th colspan="3"></th>
+            <th>댓글 작성</th>
+            <th>댓글 보기</th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @buskings.each do |busking| %>
+            <% if @sdate == busking.day.to_s %>
+            <tr>
+              <td><%= busking.day %></td>
+              <td><%= busking.place %></td>
+              <td><%= busking.name %></td>
+              <td>
+                <img src="<%= busking.image %>" height="250" width="180"/><br>
+                <a href="<%= busking.image %>" target="_blank">크게보기</a> 
+              </td>
+              <td><%= busking.content %></td>
+              <td><%= link_to 'Show', busking %></td>
+              <td><%= link_to 'Edit', edit_busking_path(busking) %></td>
+              <td><%= link_to 'Destroy', busking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <!--댓글작성-->
+              <td>
+                <form action = "/<%= busking.id%>/comment_busking_create" method= "post">
+                  댓글 : <textarea name="content"></textarea>
+                  <button type="submit" class="btn btn-default btn-xs">제출</button>
+                </form>
+              
+              </td>
+              
+              <!--댓글보기-->
+              <td>
+                <%busking.comment_buskings.each do |c| %>
+                  <%= c.content%>
+                  <a href="<%= busking.id %>/comment_busking_destroy/<%= c.id %>"> 삭제 </a><br>
+                <%end%>
+              </td>
+            </tr>
+           <% end %>
+          <% end %>
+          
+        </tbody>
+      </table>
+</div>
+</body>

@@ -1,0 +1,45 @@
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="container">
+
+<h1><strong>COMMUNNITY</strong></h1><br>
+
+
+<center>
+<p id="notice"><%= notice %></p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>작성자</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th><i class="fa fa-heart" style="font-size:24px;color:red"></i></th>
+    </thead>
+    
+    <tbody>
+      <tr>
+        <td><%= @post.user.name %></td>
+        <td><%= @post.title %></td>
+        <td><%= @post.content %></td>
+        <td><strong>Like:</strong>
+        <%= @post.likes.size %> 명이 좋아합니다. </td>
+      </tr>
+     
+    </tbody>
+</table><br>
+ 
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+</center>
+</div>
+</body>

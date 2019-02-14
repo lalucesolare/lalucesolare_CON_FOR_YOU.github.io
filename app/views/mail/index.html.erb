@@ -1,0 +1,32 @@
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container"> <!-- 양 옆 마진이 좀 생김-->
+    <h3><a href='/'><i class="fas fa-home"></i> Main</a></h3>
+    <h3><a href='/mail/main'><i class="far fa-envelope-open"></i> 메일보관함</a></h3>
+    <h1>Email 보내기</h1>
+    
+    <form action="/mail/write" method='post'>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 써주세요">
+        </div>
+      
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="메일을 보낼 주소를 입력해주세요">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Comment:</label>
+            <textarea class="form-control" rows="5" id="content" name="content" placeholder="내용을 적어주세요"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-default">메일 보내기</button>
+    </form>
+</div>
+
+</body>

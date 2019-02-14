@@ -1,0 +1,117 @@
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Jua" rel="stylesheet">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+<body>
+  
+  <div class="container">
+
+
+
+  <p id="notice"><%= notice %></p>
+  
+  <h1 style="font-family: 'Jua', sans-serif; font-size: 48px"><span class="fa fa-music" style="font-size:48px"></span><strong>BUSKING</strong></h1><br>
+  
+  <%= link_to 'New Busking', new_busking_path %><br>
+  
+  <!--게시글 검색/다음 카카오 검색API-->
+<%= form_tag('buskings/result') do %>
+
+    <div class="form-group row">
+        <div class="col-md-4 col-md-offset-3">
+            <input type="text" name="search" class="form-control text-center" placeholder="검색어">
+        </div>
+        <div class="col-md-2">
+              <button type="submit" class="btn btn-success form-control" >검색하기</button>
+        </div>
+    </div>
+    
+<% end %>
+
+ <table class="table">
+    <thead>
+      <tr>
+        <th>작성자</th>
+        <th>Day</th>
+        <th>Place</th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Content</th>
+        <th></th>
+        <th>댓글 작성</th>
+        <th>댓글 보기</th>
+        <th><i class="fa fa-heart" style="font-size:24px;color:red"></i></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @buskings.each do |busking| %>
+        <tr>
+          <td><%= busking.user.name %></td>
+          <td><%= busking.day %></td>
+          <td><%= busking.place %></td>
+          <td><%= busking.name %></td>
+          <td>
+            <img src="<%= busking.image %>" height="250" width="180"/><br>
+            <a href="<%= busking.image %>" target="_blank">크게보기</a> 
+          </td>
+          <td><%= busking.content %></td>
+          <td><%= link_to 'Show', busking %><br>
+            <% if busking.user == current_user %>
+              <%= link_to 'Edit', edit_busking_path(busking) %><br>
+              <%= link_to 'Destroy', busking, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </td>
+          
+          <!--댓글작성-->
+          <td>
+            <form action = "/<%= busking.id%>/comment_busking_create" method= "post">
+              댓글 : <textarea name="content"></textarea>
+              <button type="submit" class="btn btn-default btn-xs">제출</button>
+            </form>
+          
+          </td>
+          
+          <!--댓글보기-->
+          <td>
+            <%busking.comment_buskings.each do |c| %>
+              <%= fa_icon('comment-alt') %> <%= c.content%>
+              <% if c.user == current_user %>
+                <%= link_to comment_busking_edit_path(x_id: busking.id, c_id: c.id) do %>
+                  수정
+                <% end %>
+                <a href="<%= busking.id %>/comment_busking_destroy/<%= c.id %>"> 삭제 </a>
+              <% end %>
+              <br>
+            <%end%>
+          </td>
+          <td>
+            <% if busking.liked_busking_users.include?(current_user) %>
+              <!--좋아요 누름-->
+              <%= link_to fa_icon('heart', style: 'font-size:24px; color: red;'), 
+                          like_busking_path(post_id: busking.id), method: :post %>
+            <% else %>
+              <!--좋아요 안 누름-->
+              <%= link_to fa_icon('heart', style: "font-size:24px; color: grey;"), 
+                          like_busking_path(post_id: busking.id), method: :post %>
+            <% end %>
+            <%= busking.likebuskings.count %> 명이 좋아합니다. <br><br>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <br>
+<center><%= paginate @buskings, theme: 'twitter-bootstrap-4' %></center>
+</div>
+</body>

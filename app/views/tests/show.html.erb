@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @test.title %>
+  <video width="320" height="240" controls>
+      <source src="<%= @test.image %>" type="video/mp4">
+      <source src="<%= @test.image %>" type="video/ogg">
+      <source src="<%= @test.image %>" type="video/webm">
+      <object data="<%= @test.image %>" width="320" height="240">
+      <embed src="<%= @test.image %>" width="320" height="240">
+      </object> 
+    </video>
+</p>
+
+<%= link_to 'Edit', edit_test_path(@test) %> |
+<%= link_to 'Back', tests_path %>

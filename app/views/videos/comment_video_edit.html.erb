@@ -1,0 +1,9 @@
+<center>
+<h1><strong>댓글 수정하기</strong></h1><br><br>
+
+<%= form_tag(comment_video_update_path(x_id: @video.id, c_id: @comment.id), method: "post") do %>
+    내용:
+    <%= text_field_tag 'c_content', @comment.content %><br><br>
+    <input type="submit" class="btn" value="수정">
+<% end %>
+</center>  

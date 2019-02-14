@@ -1,0 +1,76 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<!--<h3>-->
+<!--  <a href='/'><i class="fas fa-home"></i>Main</a> -->
+<!--  |-->
+<!--  <a href='/posts'>Community</a>-->
+<!--  |-->
+<!--  <a href='/tips'>Tips</a>-->
+<!--  |-->
+<!--  <a href= '/buskings'>Buskings</a>-->
+<!--  |-->
+<!--  <a href='/photos'>Review Photos</a>-->
+<!--  |-->
+<!--  <a href='/videos'>Review Video</a>-->
+<!--  |-->
+<!--  <a href='/mail/main'>Mail</a>-->
+<!--</h3>-->
+
+</br></br></br>
+
+<h1>SEARCH RESULT</h1>
+  
+<hr>
+
+<% if @resultPost.empty? %>
+    <h3><b class="text-warning"><%= @keyword %></b>에 대한 검색 결과가 없습니다.</a></h3>
+    <!-- 검색 결과 없으면 카카오(다음) 검색 API 사용, 카카오 검색 결과 보여주기 -->
+    <%= link_to @keyword + '에 대한 다음(kakao) 검색 결과 확인하기', "./result2/"+@keyword  %>
+<% else %>
+
+ <h4><b class="text-warning"><%= @keyword %></b>에 대한 검색결과입니다.</a></h4>
+    <table class="table table-hover table-striped">
+        <thead>
+            <th width="100px">글 번호</th>
+            <th>글 제목</th>
+            <th width="60px"></th>
+        </thead>
+        <tbody>
+            <% @resultPost.each do |onePost| %>
+                <tr>
+                    <td><%= onePost.id %></td>
+                    <td>
+                        <%= link_to onePost.title, "show/#{onePost.id}" %>
+                    </td>
+                    <td>
+                        <%= link_to '', "/edit/#{onePost.id}", class: "glyphicon glyphicon-pencil" %>&nbsp;
+                        <%= link_to '', "/destroy/#{onePost.id}", class: "glyphicon glyphicon-remove" %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+        <tfoot>
+            
+        </tfoot>
+    </table>
+<% end %>
+
+<div class="form-group row">
+    <div class="col-md-2 col-md-offset-10">
+        <a href="/posts" class="btn btn-default">목록으로 돌아가기</a>
+    </div>
+</div>

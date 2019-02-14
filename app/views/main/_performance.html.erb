@@ -1,0 +1,80 @@
+<% unless current_user.liked_pers.empty? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Poster</th>
+        <th>Seat</th>
+        <th>Content</th>
+        <th></th>
+        <th>댓글 작성</th>
+        <th>댓글 보기</th>
+        <th><i class="fa fa-heart" style="font-size:24px;color:red"></i></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% current_user.liked_pers.each do |performance| %>
+        <tr>
+          <td>Line Up</td>
+          <td><%= performance.day %></td>
+          <td><%= performance.title %></td>
+          <td>
+            <img src="<%= performance.image %>" height="250" width="180"/><br>
+            <a href="<%= performance.image %>" target="_blank">크게보기</a>
+          </td>
+          <td>
+            <img src="<%= performance.second %>" height="250" width="180"/><br>
+            <a href="<%= performance.second %>" target="_blank">크게보기</a>  
+          </td>
+          <td><%= performance.content %></td>
+          <td>
+            <%= link_to "Show", performance %><br>
+            
+            <% if performance.user == current_user %>
+              <%= link_to 'Edit', edit_performance_path(performance) %><br>
+              <%= link_to 'Destroy', performance, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            </td>
+          <!--댓글작성-->
+          <td width="8%">
+            <form action = "/<%= performance.id%>/comment_per_create" method= "post">
+              댓글 : <textarea name="content"></textarea>
+              <button type="submit" class="btn btn-default btn-xs">제출</button>
+            </form>
+          </td>
+          
+          <!--댓글보기-->
+          <td width="15%">
+            <% performance.comment_pers.each do |c| %>
+              <%= fa_icon('comment-alt') %> <%= c.content%> 
+              <% if c.user == current_user %>
+                <%= link_to comment_per_edit_path(x_id: performance.id, c_id: c.id) do %>
+                  수정
+                <% end %>
+                <a href="<%= performance.id %>/comment_per_destroy/<%= c.id %>"> 삭제 </a>
+                
+              <% end %>
+              <br>
+            <%end%>
+            
+          </td>
+          <td>
+              <% if performance.liked_per_users.include?(current_user) %>
+                <!--좋아요 누름-->
+                <%= link_to fa_icon('heart', style: 'font-size:24px; color: red;'), 
+                            like_per_path(post_id: performance.id), method: :post %>
+              <% else %>
+                <!--좋아요 안 누름-->
+                <%= link_to fa_icon('heart', style: "font-size:24px; color: grey;"), 
+                            like_per_path(post_id: performance.id), method: :post %>
+              <% end %>
+              <%= performance.likepers.count %> 명이 좋아합니다. <br><br>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
